@@ -3,54 +3,46 @@ import { Component } from 'react'
 
 class App extends Component {
   state = {
-    counter: 0,
+   
     posts: [
-      {
-        id: 1,
-        title: "título 1",
-        "description": "Olá"
-      }, {
-        id: 2,
-        title: "título 2",
-        "description": "Bom dia"
-      }, {
-        id: 3,
-        title: "título 3",
-        "description": "Prazer"
-      }
     ]
   };
-  timeoutUpdate = null;
-  componentDidMount() {
-    this.handleTimeout();
+
+ componentDidMount() {
+  this.loadPosts();
   }
-  componentDidUpdate() {
-    this.handleTimeout();
-  }
-  componentWillUnmount() {
-    clearTimeout(this.timeoutUpdate);
-  }
-  handleTimeout = () => {
-    const {posts, counter} = this.state;
-    posts[0].title = "Mudança";
-    this.timeoutUpdate = setTimeout(() => {
-      // assim que o componente montar, busca dados na API
-      // configuração do estado a partir disso
-    this.setState({posts, counter: counter + 1});
-    }, 1000);
+
+  loadPosts = async () => {
+  const postsResponse = fetch('https://jsonplaceholder.typicode.com/posts')
+    const photosResponse = fetch('https://jsonplaceholder.typicode.com/photos')
+  const [posts, photos] = await Promise.all([postsResponse, photosResponse])
+
+  const postsJson = await posts.json();
+  const photosJson = await photos.json();
+  const postsAndPhotos = postsJson.map((post, index) => {
+    return {...post, cover: photosJson[index].url}
+  })
+  this.setState({posts: postsAndPhotos})
   }
 
   render() {
     const { posts, counter } = this.state;
-    return <div className="App">
+    return <section className='container'>
+
+    <div className="posts">
       <p>{counter}</p>
       {posts.map((post) => (
-        <div key={post.id}>
+      <div className='post'>
+        <img src={post.cover} alt='post cover'/>
+        <div key={post.id} className='post-content'>
           <h2>{post.title}</h2>
-          <p>{post.description}</p>
-        </div>
+          <p>{post.body}</p>
+          </div>
+          </div>
+
       ))}
     </div>
+    </section>
   }
 }
 
