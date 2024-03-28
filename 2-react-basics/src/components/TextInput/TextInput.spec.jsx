@@ -1,3 +1,5 @@
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable no-undef */
 import { render, screen } from "@testing-library/react";
 import { TextInput } from "."
 import userEvent from "@testing-library/user-event";
@@ -18,11 +20,10 @@ describe('<TextInput />', () => {
         userEvent.type(input, value);
         expect(input.value).toBe(value);
         expect(fn).toHaveBeenCalledTimes(7);
-       
-    });  
+
+    });
       it('should match snapshot', () => {
         const {container} = render(<TextInput />);
-        // eslint-disable-next-line testing-library/no-node-access
         expect(container.firstChild).toMatchSnapshot();
     })
 })

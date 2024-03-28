@@ -1,4 +1,6 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { PostCard } from '../PostCard';
+import p from 'prop-types'
 import './styles.css';
 
 export const Posts = ({ posts = [] }) => (
@@ -14,3 +16,13 @@ export const Posts = ({ posts = [] }) => (
     ))}
   </div>
 );
+Posts.defaultProps = {
+  posts: []
+}
+
+
+Posts.propTypes = {
+  posts: p.arrayOf(p.shape({ title: p.string.isRequired,
+    cover: p.string.isRequired,
+    body: p.string.isRequired,}))
+}
