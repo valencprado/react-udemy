@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import './styles.css';
 import { useState, useEffect, useCallback } from 'react'
 import { loadPosts } from '../../utils/load-posts'
