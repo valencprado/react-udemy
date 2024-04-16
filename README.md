@@ -7,8 +7,8 @@ Projetos e códigos do curso React.Js e Next.Js (nível intermediário e avança
 ## Seções
 
 _Seções finalizadas estarão em negrito_
-2. React básico 
-3. Mock Service Worker
+2. **React básico** 
+3. **Mock Service Worker**
 4. Hooks
 5. React Router Dom v5
 6. React Router Dom v6
