@@ -1,21 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
-  const [reverse, setReverse] = useState(false);
-  const handleReverse = () => {
-    setReverse(!reverse);
-  };
+  const [counter, setCounter] = useState(0);
+  useEffect(() => {
+    console.log('ComponentDidUpdate');
+  });
+  useEffect(() => {
+    console.log('ComponentDidMount');
+  }, []);
+  useEffect(() => {
+    console.log('State changed: ', counter);
+  }, [counter]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className={reverse ? 'App-logo' : 'App-logo reverse'} alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <button onClick={handleReverse}>Teste</button>
-      </header>
+      <h1>Contador {counter}</h1>
+      {/* eslint-disable-next-line no-const-assign */}
+      <button onClick={() => setCounter(counter + 1)}>+</button>
     </div>
   );
 }
